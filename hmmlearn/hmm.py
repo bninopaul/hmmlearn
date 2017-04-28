@@ -1027,7 +1027,7 @@ class GaussianHMM(_BaseHMM):
 
     def _initialize_sufficient_statistics(self):
         stats = super(GaussianHMM, self)._initialize_sufficient_statistics()
-        stats['post'] = np.zeros(self.n_states)
+        stats['post'] = np.zeros(self.n_states)+1e-1000
         stats['obs'] = np.zeros((self.n_states, self.n_features))
         stats['obs**2'] = np.zeros((self.n_states, self.n_features))
         if self._covariance_type in ('tied', 'full'):
