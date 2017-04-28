@@ -10,7 +10,7 @@ The :mod:`hmmlearn.hmm` module implements hidden Markov models.
 """
 
 import string
-import cPickle
+import _pickle as cPickle
 
 import numpy as np
 import multiprocessing as mp
@@ -46,7 +46,7 @@ decoder_algorithms = ("viterbi", "map")
 def batches(l, n):
     """ Yield successive n-sized batches from l.
     """
-    for i in xrange(0, len(l), n):
+    for i in range(0, len(l), n):
         yield l[i:i+n]
 
 
@@ -63,7 +63,7 @@ def merge_sum(x, y):
     for k in x.keys():
         if isinstance(x[k], list):
             z = []
-            for i in xrange(len(x[k])):
+            for i in range(len(x[k])):
                 z.append(x[k][i] + y[k][i])
             D[k] = z
         else:
@@ -743,7 +743,7 @@ class _BaseHMM(BaseEstimator):
         if 't' in params:
             self.transmat_ = np.vstack([np.random.dirichlet(
                 self.transmat_prior[i])
-                for i in xrange(self.n_states)])
+                for i in range(self.n_states)])
     # Methods used by self.fit()
 
     def _initialize_sufficient_statistics(self):
@@ -1283,7 +1283,7 @@ class MultinomialHMM(_BaseHMM):
                                                    self.n_symbols))
             emissionprob = np.vstack([np.random.dirichlet(
                 self.emissionprob_prior[i])
-                for i in xrange(self.n_states)])
+                for i in range(self.n_states)])
             self.emissionprob_ = emissionprob
 
     def _initialize_sufficient_statistics(self):
@@ -1952,7 +1952,7 @@ class MultinomialExponentialHMM(_BaseHMM):
                                                    self.n_symbols))
             emissionprob = np.vstack([np.random.dirichlet(
                 self.emissionprob_prior[i])
-                for i in xrange(self.n_states)])
+                for i in range(self.n_states)])
             self.emissionprob_ = emissionprob
 
         if self.memory_safe:

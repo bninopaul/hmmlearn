@@ -8,7 +8,7 @@ hidden Markov models.
 """
 
 import string
-import cPickle
+import _pickle as cPickle
 
 import numpy as np
 import multiprocessing as mp
@@ -438,7 +438,7 @@ class _BaseMixHMM(BaseEstimator):
 
     def _compute_log_likelihood(self, obs):
         return np.array([self.hmms[i]._compute_log_likelihood(obs).T
-                         for i in xrange(self.n_components)]).T
+                         for i in range(self.n_components)]).T
 
     def _generate_sample_from_state(self, component, state, random_state=None):
         pass
